@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { FaArrowLeft, FaBookOpen, FaBrain, FaCalendarCheck, FaEnvelope, FaQuoteRight } from 'react-icons/fa';
 import './App.css';
 
 function App() {
@@ -13,12 +14,12 @@ function App() {
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
   const options = [
-    "Técnicas de concentración",
-    "Técnicas para estudiar",
-    "Ayuda diaria",
-    "Organización",
-    "Cartas de motivación",
-    "Frases"
+    { label: "Técnicas de concentración", icon: <FaBrain /> },
+    { label: "Técnicas para estudiar", icon: <FaBookOpen /> },
+    { label: "Ayuda diaria", icon: <FaCalendarCheck /> },
+    { label: "Organización", icon: <FaCalendarCheck /> },
+    { label: "Cartas de motivación", icon: <FaEnvelope /> },
+    { label: "Frases", icon: <FaQuoteRight /> }
   ];
 
   const handleSendMessage = async () => {
@@ -31,7 +32,7 @@ function App() {
     setLoading(true);
 
     try {
-      const prompt = `Eres un psicólogo experto llamado MindGuide. El usuario necesita ayuda con: "${selectedOption}". 
+      const prompt = `Eres un psicólogo experto llamado MindGuide. El usuario necesita ayuda con: "${selectedOption.label}". 
       Responde de manera profesional y empática a: "${userInput}". Máximo 100 palabras.`;
 
       const result = await model.generateContent(prompt);
@@ -57,37 +58,42 @@ function App() {
 
   return (
     <div className="app-container">
-      <h1>MindGuide - Asistente Psicológico</h1>
+      <header className="header-container">
+        {selectedOption && (
+          <button 
+            className="back-to-menu-btn"
+            onClick={() => {
+              setSelectedOption(null);
+              setMessages([]);
+            }}
+            aria-label="Volver al menú"
+          >
+            <FaArrowLeft /> Volver
+          </button>
+        )}
+        <h1 className="app-title">MindGuide</h1>
+      </header>
       
       {!selectedOption ? (
-        <div className="options-container">
+        <main className="options-container">
           <h2>¿En qué necesitas ayuda hoy?</h2>
           <div className="options-grid">
             {options.map((option, index) => (
               <button
                 key={index}
-                className="option-btn"
+                className="option-card"
                 onClick={() => setSelectedOption(option)}
               >
-                {option}
+                <div className="option-icon">{option.icon}</div>
+                <span className="option-label">{option.label}</span>
               </button>
             ))}
           </div>
-        </div>
+        </main>
       ) : (
-        <div className="chat-container">
-          <button 
-            className="back-btn"
-            onClick={() => {
-              setSelectedOption(null);
-              setMessages([]);
-            }}
-          >
-            ←
-          </button>
-          
+        <main className="chat-container">
           <div className="chat-header">
-            <h2>{selectedOption}</h2>
+            <h2>{selectedOption.label}</h2>
           </div>
 
           <div className="messages-container">
@@ -111,11 +117,13 @@ function App() {
             <button 
               onClick={handleSendMessage}
               disabled={loading}
+              className="send-button"
+              aria-label="Enviar mensaje"
             >
               {loading ? '...' : 'Enviar'}
             </button>
           </div>
-        </div>
+        </main>
       )}
     </div>
   );
