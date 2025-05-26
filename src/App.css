@@ -51,8 +51,7 @@ body {
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
+  flex-grow: 1;
 }
 
 /* Encabezado */
@@ -69,6 +68,13 @@ body {
   font-weight: 700;
   color: white;
   margin: 0 auto;
+  text-align: center;
+}
+
+@media (max-width: 576px) {
+  .app-title {
+    font-size: 1.5rem;
+  }
 }
 
 /* Botón para volver al menú */
@@ -94,6 +100,13 @@ body {
   transform: translateY(-2px);
 }
 
+@media (max-width: 768px) {
+  .back-to-menu-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+}
+
 /* Opciones principales */
 .options-container {
   padding: var(--space-xl);
@@ -109,6 +122,13 @@ body {
   margin-bottom: var(--space-lg);
   font-weight: 600;
   font-size: 1.5rem;
+  text-align: center;
+}
+
+@media (max-width: 576px) {
+  .options-container h2 {
+    font-size: 1.3rem;
+  }
 }
 
 .options-grid {
@@ -145,10 +165,23 @@ body {
   margin-bottom: 0.5rem;
 }
 
+@media (max-width: 576px) {
+  .option-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.3rem;
+  }
+}
+
 .option-label {
   font-size: 1.1rem;
   color: var(--color-text);
   font-weight: 500;
+}
+
+@media (max-width: 576px) {
+  .option-label {
+    font-size: 1rem;
+  }
 }
 
 /* Área de chat */
@@ -170,6 +203,12 @@ body {
   font-size: 1.3rem;
   font-weight: 600;
   margin: 0;
+}
+
+@media (max-width: 576px) {
+  .chat-header h2 {
+    font-size: 1.1rem;
+  }
 }
 
 .messages-container {
@@ -257,6 +296,31 @@ body {
   cursor: not-allowed;
 }
 
+@media (max-width: 768px) {
+  .input-container button,
+  .send-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .send-button {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .input-container {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .input-container input {
+    width: 100%;
+  }
+}
+
 /* Scrollbar personalizada */
 .messages-container::-webkit-scrollbar {
   width: 8px;
@@ -298,40 +362,4 @@ body {
 @keyframes bounce {
   0%, 80%, 100% { transform: scale(0); }
   40% { transform: scale(1); }
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .header-container {
-    padding: var(--space-sm);
-  }
-
-  .app-title {
-    font-size: 1.5rem;
-  }
-
-  .options-container h2 {
-    font-size: 1.3rem;
-  }
-
-  .options-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .option-card {
-    padding: var(--space-md);
-  }
-
-  .chat-header h2 {
-    font-size: 1.1rem;
-  }
-
-  .input-container {
-    flex-direction: column;
-    gap: var(--space-sm);
-  }
-
-  .send-button {
-    width: 100%;
-  }
 }
