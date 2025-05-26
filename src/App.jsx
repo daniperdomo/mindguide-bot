@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { FaArrowLeft, FaBookOpen, FaBrain, FaCalendarCheck, FaEnvelope, FaQuoteRight } from 'react-icons/fa';
 import './App.css';
@@ -8,6 +8,7 @@ function App() {
   const [messages, setMessages] = useState([]);
   const [userInput, setUserInput] = useState('');
   const [loading, setLoading] = useState(false);
+  const messagesEndRef = useRef(null); // Referencia para el final del contenedor de mensajes
 
   // Configuración de Gemini
   const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_KEY);
@@ -27,7 +28,7 @@ function App() {
 
     // Mensaje del usuario
     const newUserMessage = { sender: 'user', text: userInput };
-    setMessages([...messages, newUserMessage]);
+    setMessages(prev => [...prev, newUserMessage]);
     setUserInput('');
     setLoading(true);
 
@@ -55,6 +56,11 @@ function App() {
       setLoading(false);
     }
   };
+
+  // Desplazar hacia abajo cuando se agreguen nuevos mensajes
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   return (
     <div className="app-container">
@@ -103,6 +109,7 @@ function App() {
               </div>
             ))}
             {loading && <div className="message bot">Pensando...</div>}
+            <div ref={messagesEndRef} /> {/* Referencia para el final del contenedor de mensajes */}
           </div>
 
           <div className="input-container">
