@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { FaArrowLeft, FaBookOpen, FaBrain, FaCalendarCheck, FaEnvelope, FaQuoteRight } from 'react-icons/fa';
 import './App.css';
+import { FaHome } from 'react-icons/fa';
 
 function App() {
   const [selectedOption, setSelectedOption] = useState(null);
