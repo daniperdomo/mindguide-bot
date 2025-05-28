@@ -1,11 +1,11 @@
 export default function BotOptions({ onSelect }) {
   const options = [
     "Técnicas de concentración",
-    "Técnicas para estudiar",
+    "Ayuda con Ansiedad y Depresión/Estrés",
     "Ayuda diaria",
     "Organización",
     "Cartas de motivación",
-    "Frases"
+    "Ayuda de problemas Familiares (Desahogo en general)"
   ];
 
   return (
