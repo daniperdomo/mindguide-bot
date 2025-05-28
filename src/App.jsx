@@ -16,11 +16,11 @@ function App() {
 
   const options = [
     { label: "Técnicas de concentración", icon: <FaBrain /> },
-    { label: "Técnicas para estudiar", icon: <FaBookOpen /> },
+    { label: "Ayuda con Ansiedad y Depresión/Estrés", icon: <FaBookOpen /> },
     { label: "Ayuda diaria", icon: <FaCalendarCheck /> },
     { label: "Organización", icon: <FaCalendarCheck /> },
     { label: "Cartas de motivación", icon: <FaEnvelope /> },
-    { label: "Frases", icon: <FaQuoteRight /> }
+    { label: "Ayuda de problemas Familiares (Desahogo en general)", icon: <FaHome /> }
   ];
 
   const handleSendMessage = async () => {
