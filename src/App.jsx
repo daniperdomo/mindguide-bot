@@ -15,7 +15,7 @@ function App() {
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
   const options = [
-    { label: "Técnicas de concentración", icon: <FaBrain /> },
+    { label: "Técnicas de concentración ", icon: <FaBrain /> },
     { label: "Ayuda con Ansiedad y Depresión/Estrés", icon: <FaBookOpen /> },
     { label: "Ayuda diaria", icon: <FaCalendarCheck /> },
     { label: "Organización", icon: <FaCalendarCheck /> },
